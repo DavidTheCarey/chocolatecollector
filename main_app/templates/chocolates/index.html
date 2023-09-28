@@ -4,6 +4,7 @@
 <h1>Chocolates List</h1>
 
 {% for choco in chocolates %}
+<a href="{% url 'detail' choco.id %}">
   <div class="card">
     <div class="card-content">
       <span class="card-title">{{ choco.name }}</span>
@@ -12,6 +13,7 @@
       <p>Flavor: {{ choco.flavor }}</p>
     </div>
   </div>
+</a>
 {% endfor %}
 
 {% endblock %}

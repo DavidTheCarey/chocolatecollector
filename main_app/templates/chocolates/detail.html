@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Chocolate Details</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ chocolate.name }}</span>
+    <p>Type: {{ chocolate.type }}</p>
+    <p>Description: {{ chocolate.description|linebreaks }}</p>
+    <p>Flavor: {{ chocolate.flavor }}</p>
+  </div>
+</div>
+
+{% endblock %}
