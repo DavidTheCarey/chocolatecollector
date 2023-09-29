@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
 
 # Create your models here.
 chocolates = [
@@ -20,3 +21,20 @@ class Chocolate(models.Model):
         return reverse('detail', kwargs={'chocolate_id': self.id})
 
 
+class Order(models.Model):
+  date = models.DateField('Order Date')
+  location = models.CharField(
+    max_length=100,
+    default="Boston"
+  )
+  # Create a cat_id FK
+  chocolate = models.ForeignKey(
+    Chocolate,
+    on_delete=models.CASCADE
+  )
+
+#   def __str__(self):
+#     return f"{self.get_location_display()} on {self.date}"
+
+  class Meta:
+    ordering = ['-date']

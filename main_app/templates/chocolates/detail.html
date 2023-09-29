@@ -15,5 +15,39 @@
     <a href="{% url 'chocolates_delete' chocolate.id %}">Delete</a>
   </div>
 </div>
+ <!-- New Markup Below -->
+ <div class="col s6">
+    <form action="{% url 'add_order' chocolate.id %}" method="POST">
+      {% csrf_token %}
+      <!-- Render the inputs -->
+      {{ order_form.as_p }}
+      <input type="submit" class="btn" value="Add Order">
+    </form>
+    <br>
+    <table class="striped">
+      <thead>
+        <tr><th>Date</th><th>Location</th></tr>
+      </thead>
+      <tbody>
+        {% for order in chocolate.order_set.all %}
+          <tr>
+            <td>{{order.date}}</td>
+            <td>{{order.location}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <!-- New Markup Above -->
+</div>
 
+<script>
+  const dateEl = document.getElementById('id_date');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+</script>
 {% endblock %}
