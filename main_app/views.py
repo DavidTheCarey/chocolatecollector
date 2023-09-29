@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Chocolate
 
 # Create your views here.
@@ -21,3 +21,15 @@ def chocolate_detail(request, chocolate_id):
     return render(request, 'chocolates/detail.html', {
         'chocolate': chocolate
     })
+
+class ChocolateCreate(CreateView):
+  model = Chocolate
+  fields = '__all__'
+
+class ChocolateUpdate(UpdateView):
+  model = Chocolate
+  fields = ['type', 'description', 'flavor']
+
+class ChocolateDelete(DeleteView):
+  model = Chocolate
+  success_url = '/chocolates'

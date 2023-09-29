@@ -10,6 +10,10 @@
     <p>Description: {{ chocolate.description|linebreaks }}</p>
     <p>Flavor: {{ chocolate.flavor }}</p>
   </div>
+  <div class="card-action">
+    <a href="{% url 'chocolates_update' chocolate.id %}">Edit</a>
+    <a href="{% url 'chocolates_delete' chocolate.id %}">Delete</a>
+  </div>
 </div>
 
 {% endblock %}
