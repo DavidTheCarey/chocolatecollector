@@ -41,6 +41,55 @@
   <!-- New Markup Above -->
 </div>
 
+<hr>
+<div class="row">
+  <div class="col s6">
+    <h3>{{ chocolate.name }}'s Stores</h3>
+    {% if chocolate.stores.count %}
+      {% for store in chocolate.stores.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+                {{ store.name }} is {{ store.distance }} Mi. away
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'unassoc_store' chocolate.id store.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Remove</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>Not available near you</h5>
+    {% endif %}
+  </div>
+  <!-- Available stores will come after this line -->
+  <div class="col s6">
+    <h3>Available Stores</h3>
+    {% if stores.count %}
+      {% for store in stores.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+                {{ store.name }} is {{ store.distance }} Mi. away
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_store' chocolate.id store.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}  
+    {% else %}
+      <h5>{{chocolate.name}} Already is at all available stores near you</h5>
+    {% endif %}
+  </div>
+</div>
+
 <script>
   const dateEl = document.getElementById('id_date');
   M.Datepicker.init(dateEl, {

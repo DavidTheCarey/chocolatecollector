@@ -8,11 +8,22 @@ chocolates = [
   {'name': 'Butter Cream', 'type': 'Cream Filled', 'description': 'A delicious confectionery piece with a familiar creamy center', 'flavor': "Dark Chocolate"},
 ]
 
+class Store(models.Model):
+  name = models.CharField(max_length=50)
+  distance = models.CharField(max_length=5)
+
+  def __str__(self):
+    return self.name
+
+  def get_absolute_url(self):
+    return reverse('stores_detail', kwargs={'pk': self.id})
+
 class Chocolate(models.Model):
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     flavor = models.CharField(max_length=100)
+    stores = models.ManyToManyField(Store)
 
     def __str__(self):
         return self.name
